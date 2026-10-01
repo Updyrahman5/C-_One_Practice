@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace Assignment3
 {
     public partial class Form1 : Form
@@ -18,7 +17,7 @@ namespace Assignment3
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
@@ -27,26 +26,36 @@ namespace Assignment3
         {
             try
             {
-                // Creating variables
-                string food1 = textfood1.Text;
-                int price1 = int.Parse(textprice1.Text);
+                // Getting all user inputs from textboxes
+                string customerName = txtCustomer.Text;
+                double previous = double.Parse(txtPrevious.Text);
+                double current = double.Parse(txtCurrent.Text);
+                double unitPrice = double.Parse(txtUnitPrice.Text);
 
-                string food2 = textfood2.Text;
-                int price2 = int.Parse(textprice2.Text);
+                // Calculations
+                double unitsUsed = current - previous;
 
-                // Calculate tax
-                double tax = (price1 + price2) * 0.07;
+                double bill = (unitsUsed * unitPrice);
+                double tax = bill * 0.07;   
+                double fixedCharge = 5;
 
-                // Calculate total
-                double total = price1 + price2 + tax;
+                double total = bill + tax + fixedCharge;
 
-                // Label output of result
-                display.Text = "tax is $" + tax.ToString("0.00") + " total is $" + total.ToString("0.00");
+                // OUTPUT
+                lblUnits.Text = "Units Used: " + unitsUsed.ToString();
+                lblBill.Text = "Bill: $" + tax.ToString("0.00");
+                lblTotal.Text = "Total Bill: $" + total.ToString("0.00");
             }
             catch
             {
-                MessageBox.Show("enter valid");
+                //if user enters invalid input, show error mess
+                MessageBox.Show("Enter valid numbers!");
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
